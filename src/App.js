@@ -6,33 +6,29 @@ function App() {
   const [fact, setFact] = useState("");
 
   const onChangeHandler = event => {
-     setTheory(event.target.value);
+    setTheory(event.target.value);
   };
 
   function handle(e){
-    try {
-      if(!e.keyCode || e.keyCode === 13){
-          setFact();
-          document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'block');
-          e.preventDefault(); // Ensure it is only this code that runs
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function () {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                  document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'none');
-                  setFact(this.response);
-              }  
-          };
-          xhr.open("POST", 'http://fact-checker-env.eba-jjs6wwzd.us-east-1.elasticbeanstalk.com/', true);
-          xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
-          xhr.setRequestHeader('X-Referer', window.location.href);
-          xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.send(JSON.stringify({
-              theory: theory
-          }));
-      }
-    } catch (error) {
-      console.log(error);
+    if(!e.keyCode || e.keyCode === 13){
+        setFact();
+        document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'block');
+        e.preventDefault(); // Ensure it is only this code that runs
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'none');
+                setFact(this.response);
+            }  
+        };
+        xhr.open("POST", 'http://fact-checker-env.eba-jjs6wwzd.us-east-1.elasticbeanstalk.com/', true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
+        xhr.setRequestHeader('X-Referer', window.location.href);
+        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            theory: theory
+        }));
     }
   }
 
