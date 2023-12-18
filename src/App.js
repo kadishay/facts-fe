@@ -22,6 +22,9 @@ function App() {
               }  
           };
           xhr.open("POST", 'http://fact-checker-env.eba-jjs6wwzd.us-east-1.elasticbeanstalk.com/', true);
+          xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
+          xhr.setRequestHeader('X-Referer', window.location.href);
+          xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.send(JSON.stringify({
               theory: theory
