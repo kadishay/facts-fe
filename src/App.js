@@ -10,6 +10,7 @@ function App() {
   };
 
   function handle(e){
+    try {
       if(!e.keyCode || e.keyCode === 13){
           setFact();
           document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'block');
@@ -30,6 +31,9 @@ function App() {
               theory: theory
           }));
       }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
