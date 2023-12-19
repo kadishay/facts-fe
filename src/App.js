@@ -26,9 +26,7 @@ function App() {
         xhr.setRequestHeader('X-Referer', window.location.href);
         xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
         xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-            theory: theory
-        }));
+        xhr.send(theory);
     }
   }
 
