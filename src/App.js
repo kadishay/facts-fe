@@ -21,7 +21,7 @@ function App() {
                 setFact(this.response);
             }  
         };
-        xhr.open("POST", 'http://fact-checker-env.eba-jjs6wwzd.us-east-1.elasticbeanstalk.com/', true);
+        xhr.open("POST", 'https://rt09w8q66h.execute-api.us-east-1.amazonaws.com/v1', true);
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
         xhr.setRequestHeader('X-Referer', window.location.href);
         xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
