@@ -7,11 +7,14 @@ function App() {
 
   const onChangeHandler = event => {
     setTheory(event.target.value);
+    if(event.key === 'Enter') {
+      alert("as we EEENTER");
+    }
   };
 
   function handle(e){
-    if(!e.keyCode || e.keyCode === 13){
-        setFact();
+    if(!e.key || e.key === "Enter"){
+        setFact("");
         document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'block');
         e.preventDefault(); // Ensure it is only this code that runs
         var xhr = new XMLHttpRequest();
@@ -33,7 +36,7 @@ function App() {
   return (
     <div className="App">
       <h1 className="title">Fact Checker</h1>
-      <input placeholder="Paste text to be reviewed here and click “really?”" className="theory" onChange={onChangeHandler} value={theory}></input>
+      <input placeholder="Paste text to be reviewed here and click “really?”" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
       <div className="button" onClick={handle}> Really? </div>
       <div className="fact">{fact}</div>
 
