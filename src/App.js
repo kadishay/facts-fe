@@ -36,7 +36,7 @@ function App() {
       <h1 className="title">Fact Checker</h1>
       <input placeholder="Paste text to be reviewed here and click “really?”" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
       <div className="button" onClick={handle}> Really? </div>
-      <div className="fact">{fact && fact.answer ? fact.answer : "" }</div>
+      <div className="fact">{fact}</div>
 
       <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
