@@ -25,6 +25,7 @@ function App() {
             }  
         };
         xhr.open("POST", 'https://rt09w8q66h.execute-api.us-east-1.amazonaws.com/', true);
+        xhr.timeout = 90000; // time in milliseconds
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
         xhr.setRequestHeader('X-Referer', window.location.href);
         xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
