@@ -7,9 +7,6 @@ function App() {
 
   const onChangeHandler = event => {
     setTheory(event.target.value);
-    if(event.key === 'Enter') {
-      alert("as we EEENTER");
-    }
   };
 
   function handle(e){
@@ -21,7 +18,7 @@ function App() {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'none');
-                setFact(this.response);
+                setFact(JSON.parse(this.response));
             }  
         };
         xhr.open("POST", 'https://rt09w8q66h.execute-api.us-east-1.amazonaws.com/', true);
@@ -39,7 +36,7 @@ function App() {
       <h1 className="title">Fact Checker</h1>
       <input placeholder="Paste text to be reviewed here and click “really?”" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
       <div className="button" onClick={handle}> Really? </div>
-      <div className="fact">{fact}</div>
+      <div className="fact">{fact && fact.answer ? fact.answer : "" }</div>
 
       <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
