@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import serious from './serious.png';
 import funny from './funny.png';
@@ -15,30 +15,30 @@ function App() {
     setTheory(event.target.value);
   };
 
-  const seperator = "TLDR";
+  const seperator = "%%%SEPERATOR%%%";
 
-  function handle(e){
+  function handle(e,){
     if(!e.key || e.key === "Enter"){
-        setFact("");
-        document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'block');
-        e.preventDefault(); // Ensure it is only this code that runs
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-              document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'none');
-              setFact(this.response);
-            }  
-        };
-        xhr.open("POST", 'https://rt09w8q66h.execute-api.us-east-1.amazonaws.com/', true);
-        xhr.timeout = 90000; // time in milliseconds
-        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
-        xhr.setRequestHeader('X-Referer', window.location.href);
-        xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({
-          theory: theory,
-          funny_mode: mode
-        }));
+      setFact("");
+      document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'block');
+      e.preventDefault(); // Ensure it is only this code that runs
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'none');
+            setFact(this.response);
+          }  
+      };
+      xhr.open("POST", 'https://rt09w8q66h.execute-api.us-east-1.amazonaws.com/', true);
+      xhr.timeout = 90000; // time in milliseconds
+      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest'); 
+      xhr.setRequestHeader('X-Referer', window.location.href);
+      xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      
+      xhr.send(JSON.stringify({
+        theory: theory
+      }));
     }
   }
 
@@ -48,10 +48,12 @@ function App() {
       <input placeholder="Paste text to be reviewed here and click “really?”" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
       <div className="button" onClick={handle}> Really? </div>
       <div className="responseStyle"> 
-        <img src={mode ? serious_disabled : serious} onClick={(e)=>{setMode(false);handle(e)}} alt="serious mode" />
-        <img src={mode ? funny : funny_disabled} onClick={(e)=>{setMode(true);handle(e)}} alt="funny mode" />
+        <img src={mode ? serious_disabled : serious} onClick={(e)=>{setMode(false);}} alt="serious mode" />
+        <img src={mode ? funny : funny_disabled} onClick={(e)=>{setMode(true);}} alt="funny mode" />
       </div>
-      <div className="fact">{fact}</div>
+      <div className="fact">{
+        (fact.indexOf(seperator)===-1) ? fact : 
+          (mode)? fact.split(seperator)[1].trim() : fact.split(seperator)[0].trim()}</div>
 
       <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
