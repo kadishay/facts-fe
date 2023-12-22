@@ -58,6 +58,18 @@ input {
     white-space: pre-line;
 }
 
+.responseStyle {
+  margin: 15px 50%;
+  position: absolute;
+  left: 22%;
+  width: 100px;
+}
+
+.responseStyle img {
+  cursor: pointer;
+  height: 50px;
+}
+
 @font-face {
   font-family: 'Nintendoid1';
   font-style: normal;
@@ -184,5 +196,8 @@ input {
   .lds-roller {
     left: calc(50% - 45px);
     top: 280px;
+  }
+  .responseStyle {
+    left: 20%;
   }
 }
