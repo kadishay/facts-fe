@@ -1,21 +1,19 @@
 import './App.css';
 import React, { useState } from 'react';
 
-import serious from './serious.png';
-import funny from './funny.png';
-import funny_disabled from './funny-disabled.png';
-import serious_disabled from './serious-disabled.png';
+//import serious from './serious.png';
+//import funny from './funny.png';
+//import funny_disabled from './funny-disabled.png';
+//import serious_disabled from './serious-disabled.png';
 
 function App() {
   const [theory, setTheory] = useState("");
   const [fact, setFact] = useState("");
-  const [mode, setMode] = useState(true); // true is funny
+  //const [mode, setMode] = useState(true); // true is funny
 
   const onChangeHandler = event => {
     setTheory(event.target.value);
   };
-
-  const seperator = "%%%SEPERATOR%%%";
 
   function handle(e,){
     if(!e.key || e.key === "Enter"){
@@ -47,13 +45,18 @@ function App() {
       <h1 className="title">Fact Checker</h1>
       <input placeholder="Paste text to be reviewed here and click “really?”" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
       <div className="button" onClick={handle}> Really? </div>
-      <div className="responseStyle"> 
-        <img src={mode ? serious_disabled : serious} onClick={(e)=>{setMode(false);}} alt="serious mode" />
-        <img src={mode ? funny : funny_disabled} onClick={(e)=>{setMode(true);}} alt="funny mode" />
-      </div>
-      <div className="fact">{
+      {/* 
+        <div className="responseStyle"> 
+          <img src={mode ? serious_disabled : serious} onClick={(e)=>{setMode(false);}} alt="serious mode" />
+          <img src={mode ? funny : funny_disabled} onClick={(e)=>{setMode(true);}} alt="funny mode" />
+        </div>
+        {
         (fact.indexOf(seperator)===-1) ? fact : 
-          (mode)? fact.split(seperator)[1].trim() : fact.split(seperator)[0].trim()}</div>
+          (mode) ? fact.split(seperator)[1].trim() : fact.split(seperator)[0].trim()
+        }
+      */}
+      
+      <div className="fact">{fact}</div>
 
       <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
