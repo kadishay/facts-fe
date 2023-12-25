@@ -59,7 +59,7 @@ function App() {
       <div className="fact">
         {fact ? fact.fact : ""}
         <br />
-        <div className="fact-sources-title">Sources:</div>
+        <div className="fact-sources-title">{fact && fact.sources ? "Sources:" : ""}</div>
         <div className="fact-sources">{fact && fact.sources ? fact.sources.map((source)=> <div className="fact-card">
           <div className="fact-card-title">{source.title}</div>
           <div className="fact-card-content">{source.content}</div>
