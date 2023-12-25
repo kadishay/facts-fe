@@ -24,7 +24,7 @@ function App() {
       xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'none');
-            setFact(this.response);
+            setFact(JSON.parse(this.response));
           }  
       };
       xhr.open("POST", 'https://rt09w8q66h.execute-api.us-east-1.amazonaws.com/', true);
@@ -56,7 +56,7 @@ function App() {
         }
       */}
       
-      <div className="fact">{fact}</div>
+      <div className="fact">{fact ? fact.fact : ""}</div>
 
       <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
