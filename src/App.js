@@ -56,7 +56,17 @@ function App() {
         }
       */}
       
-      <div className="fact">{fact ? fact.fact : ""}</div>
+      <div className="fact">
+        {fact ? fact.fact : ""}
+        <br />
+        <div className="fact-sources-title">Sources:</div>
+        <div className="fact-sources">{fact && fact.sources ? fact.sources.map((source)=> <div className="fact-card">
+          <div className="fact-card-title">{source.title}</div>
+          <div className="fact-card-content">{source.content}</div>
+          <a href={source.url} className="fact-card-url">{source.url}</a>
+        </div>) : ""}</div>
+      </div>
+      
 
       <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
     </div>
