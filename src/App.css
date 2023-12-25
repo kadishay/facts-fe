@@ -49,7 +49,7 @@ input {
   background-color: white;
 }
 
-.fact {
+.fact-container {
   min-height: 100px;
   padding: 85px 28% 10px 28%;
   line-height: 34px;
@@ -79,6 +79,12 @@ input {
 
 .fact-card-url {
   color: whitesmoke;
+}
+
+.copy-button {
+  width: 35px;
+  padding-right: 15px;
+  cursor: pointer;
 }
 
 .responseStyle {
