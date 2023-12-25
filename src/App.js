@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
 import html2canvas from 'html2canvas';
+import toast, { Toaster } from 'react-hot-toast';
 
 //import serious from './serious.png';
 //import funny from './funny.png';
@@ -51,6 +52,7 @@ function App() {
       textToCopy = fact.fact.split("X - ")[1].split("SUMMARY")[0] + " https://www.vereally.com/";
     }
     navigator.clipboard.writeText(textToCopy);
+    toast.success('Text copied to clipboard');
   }
 
   function saveImage() {
@@ -122,6 +124,8 @@ function App() {
       </div>
       
       <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      
+      <Toaster />
     </div>
   );
 }
