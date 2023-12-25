@@ -1,13 +1,15 @@
 import './App.css';
 import React, { useState } from 'react';
+import html2canvas from 'html2canvas';
 
 //import serious from './serious.png';
 //import funny from './funny.png';
 //import funny_disabled from './funny-disabled.png';
 //import serious_disabled from './serious-disabled.png';
 
-import twitterX from './twitter-x-white.png';
-import copyClip from './copy-clip-white.png';
+import twitterX from './twitter-x.png';
+import copyClip from './copy-clip.png';
+import camera from './camera.png';
 
 function App() {
   const [theory, setTheory] = useState("");
@@ -51,6 +53,33 @@ function App() {
     navigator.clipboard.writeText(textToCopy);
   }
 
+  function saveImage() {
+    /*
+      html2canvas(document.body).then(function(canvas) {
+                document.body.appendChild(canvas);
+            });
+    */
+    html2canvas(document.querySelectorAll(".App")[0]).then(function(canvas) {
+        saveAs(canvas.toDataURL(), 'file-name.png');
+    });
+  }
+
+  function saveAs(uri, filename) {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+        link.href = uri;
+        link.download = filename;
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+        //simulate click
+        link.click();
+        //remove the link when done
+        document.body.removeChild(link);
+    } else {
+        window.open(uri);
+    }
+  }
+
   return (
     <div className="App">
       <h1 className="title">Fact Checker</h1>
@@ -75,13 +104,14 @@ function App() {
             <br />
             <img className="copy-button" src={twitterX} onClick={()=>{copyText(true)}} />
             <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} />
+            <img className="copy-button" src={camera} onClick={()=>{saveImage()}} />
           </div>
         : ""}
 
         {fact && fact.sources ? <div>
           <br />
           <div className="fact-sources-title">{fact && fact.sources ? "Sources:" : ""}</div>
-          <div className="fact-sources">{fact && fact.sources ? fact.sources.map((source)=> <div className="fact-card">
+          <div className="fact-sources">{fact && fact.sources ? fact.sources.map((source, id)=> <div key={id} className="fact-card">
               <div className="fact-card-title">{source.title}</div>
               <div className="fact-card-content">{source.content}</div>
               <a href={source.url} className="fact-card-url">{source.url}</a>
