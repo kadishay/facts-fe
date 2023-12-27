@@ -121,9 +121,9 @@ function App() {
         
         <div className="icons-container">
           <br />
-          <img className="copy-button" src={twitterX} onClick={()=>{copyText(true)}} />
-          <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} />
-          <img className="copy-button" src={screenshot} onClick={()=>{saveImage()}} />
+          <img className="copy-button" src={twitterX} onClick={()=>{copyText(true)}}  title="Copy X text to clipboard"/>
+          <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} title="Copy all text to clipboard"/>
+          <img className="copy-button" src={screenshot} onClick={()=>{saveImage()}}   title="Save image"/>
         </div>
       </div>
       : ""}
