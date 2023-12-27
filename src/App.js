@@ -10,11 +10,14 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import twitterX from './twitter-x.png';
 import copyClip from './copy-clip.png';
-import camera from './camera.png';
+import screenshot from './screenshot.png';
+import magnifingGlass from './magnifying-glass.png';
+import deleteIcon from './delete.png';
 
 function App() {
   const [theory, setTheory] = useState("");
   const [fact, setFact] = useState("");
+  const [logoAnimation, setlogoAnimation] = useState(false);
   //const [mode, setMode] = useState(true); // true is funny
 
   const onChangeHandler = event => {
@@ -24,13 +27,13 @@ function App() {
   function handle(e){
     if(!e.key || e.key === "Enter"){
       setFact("");
-      document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'block');
       e.preventDefault(); // Ensure it is only this code that runs
       var xhr = new XMLHttpRequest();
+      setlogoAnimation(true);
       xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            document.querySelectorAll(".lds-roller")[0].style.setProperty('display', 'none');
             setFact(JSON.parse(this.response));
+            setlogoAnimation(false);
           }  
       };
       xhr.open("POST", 'https://rt09w8q66h.execute-api.us-east-1.amazonaws.com/', true);
@@ -62,7 +65,7 @@ function App() {
             });
     */
     html2canvas(document.querySelectorAll(".App")[0]).then(function(canvas) {
-        saveAs(canvas.toDataURL(), 'file-name.png');
+        saveAs(canvas.toDataURL(), 'vereally.png');
     });
   }
 
@@ -84,9 +87,17 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="title">Fact Checker</h1>
-      <input placeholder="Paste text to be reviewed here and click “really?”" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
+      <div className="header-container">
+        <div className={logoAnimation ? "logo logo-animation" : "logo"} />
+        <h1 className="title">VEREALLY</h1>
+      </div>
+      <div className="input-containter">
+        <img className="magnifying-glass" src={magnifingGlass} />
+        {theory ? <img className="clean-input" src={deleteIcon} onClick={()=>{setTheory("")}} /> : ""}
+        <input placeholder="Enter your text and let’s check it" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
+      </div>
       <div className="button" onClick={handle}> Really? </div>
+
       {/* 
         <div className="responseStyle"> 
           <img src={mode ? serious_disabled : serious} onClick={(e)=>{setMode(false);}} alt="serious mode" />
@@ -98,33 +109,40 @@ function App() {
         }
       */}
       
+      {fact ?  
       <div className="fact-container">
-        {fact ? <div id="fact" className="fact"> {fact.fact} </div> : ""}
+        <div className="fact fact-tldr"> TLDR - {fact.tldr? fact.tldr.trim() : ""} </div>
+        <br />
+        <div className="fact fact-title"> X </div>
+        <div className="fact"> {fact.x} </div>
+        <br />
+        <div className="fact fact-title"> SUMMARY </div>
+        <div className="fact"> {fact.sum} </div>
         
-        {fact ? 
-          <div>
-            <br />
-            <img className="copy-button" src={twitterX} onClick={()=>{copyText(true)}} />
-            <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} />
-            <img className="copy-button" src={camera} onClick={()=>{saveImage()}} />
-          </div>
-        : ""}
+        <div className="icons-container">
+          <br />
+          <img className="copy-button" src={twitterX} onClick={()=>{copyText(true)}} />
+          <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} />
+          <img className="copy-button" src={screenshot} onClick={()=>{saveImage()}} />
+        </div>
+      </div>
+      : ""}
 
-        {fact && fact.sources ? <div>
+      {fact && fact.sources ? <div className="source-container">
           <br />
           <div className="fact-sources-title">{fact && fact.sources ? "Sources:" : ""}</div>
           <div className="fact-sources">{fact && fact.sources ? fact.sources.map((source, id)=> <div key={id} className="fact-card">
               <div className="fact-card-title">{source.title}</div>
-              <div className="fact-card-content">{source.content}</div>
+              
               <a href={source.url} className="fact-card-url">{source.url}</a>
             </div>) : ""}
           </div>
         </div> : ""}
 
-      </div>
-      
-      <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-      
+        {/*<div className="fact-card-content">{source.content}</div>*/}
+            
+      <div className="footer"> Powered by People Who Aim for Justice </div>
+
       <Toaster />
     </div>
   );
