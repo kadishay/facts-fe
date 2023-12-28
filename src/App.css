@@ -39,20 +39,25 @@ body {
   width: 35px;
   aspect-ratio: 1;
   border: 0px solid #1E1E1E;
-  background: radial-gradient(farthest-side,#fff 98%,#0000) top, radial-gradient(farthest-side,#fff 98%,#0000) top, radial-gradient(farthest-side,#fff 98%,#0000) left, radial-gradient(farthest-side,#fff 98%,#0000) right, radial-gradient(farthest-side,#fff 98%,#0000) bottom, #1E1E1E;
+  background: radial-gradient(farthest-side,#fff 85%,#0000) top, 
+              radial-gradient(farthest-side,#fff 85%,#0000) top, 
+              radial-gradient(farthest-side,#fff 85%,#0000) left, 
+              radial-gradient(farthest-side,#fff 85%,#0000) right, 
+              radial-gradient(farthest-side,#fff 85%,#0000) bottom, 
+              #1e1e1e;
   background-size: 13px 13px;
   background-repeat: no-repeat;
   display: inline-block;
 }
-.logo-animation {
+.logo.logo-animation {
   animation: logo 2s infinite;
 }
 @keyframes logo {
-  0%   {background-position:top,top,left,right,bottom}
-  25%  {background-position:right,top,left,right,bottom}
-  50%  {background-position:bottom,top,left,right,bottom}
-  75%  {background-position:left,top,left,right,bottom}
-  100% {background-position:top,top,left,right,bottom}
+  0%   {background-position:top,top,left,right,bottom; filter:opacity(1.0);}
+  25%  {background-position:right,top,left,right,bottom; filter:opacity(0.8);}
+  50%  {background-position:bottom,top,left,right,bottom; filter:opacity(0.6);}
+  75%  {background-position:left,top,left,right,bottom; filter:opacity(0.8);}
+  100% {background-position:top,top,left,right,bottom; filter:opacity(1.0);}
 }
 
 h1 {
