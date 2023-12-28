@@ -9,8 +9,8 @@ import toast, { Toaster } from 'react-hot-toast';
 //import serious_disabled from './serious-disabled.png';
 
 import twitterX from './twitter-x.png';
-import copyClip from './copy-clip.png';
-import screenshot from './screenshot.png';
+import copyClip from './copy-clip.svg';
+import screenshot from './screenshot.svg';
 import magnifingGlass from './magnifying-glass.png';
 import deleteIcon from './delete.png';
 
@@ -121,9 +121,9 @@ function App() {
         
         <div className="icons-container">
           <br />
-          <img className="copy-button" src={twitterX} onClick={()=>{copyText(true)}}  title="Copy X text to clipboard"/>
+          <img className="copy-button twitter-button" src={twitterX} onClick={()=>{copyText(true)}}  title="Copy X text to clipboard"/>
           <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} title="Copy all text to clipboard"/>
-          <img className="copy-button" src={screenshot} onClick={()=>{saveImage()}}   title="Save image"/>
+          <img className="copy-button screen-shoot-button" src={screenshot} onClick={()=>{saveImage()}}   title="Save image"/>
         </div>
       </div>
       : ""}

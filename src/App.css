@@ -176,9 +176,19 @@ h1 {
 }
 
 .copy-button {
-  width: 20px;
-  padding-right: 15px;
+  height: 25px;
+  padding-left: 15px;
   cursor: pointer;
+}
+
+.copy-button.twitter-button {
+  height: 20px;
+  margin-bottom: 3px;
+}
+
+.copy-button.screen-shoot-button { 
+  height: 27px;
+  margin-bottom: -1px;
 }
 
 .responseStyle {
