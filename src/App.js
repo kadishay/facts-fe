@@ -32,7 +32,11 @@ function App() {
       setlogoAnimation(true);
       xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
-            setFact(JSON.parse(this.response));
+            try {
+              setFact(JSON.parse(this.response));
+            } catch (parseError) {
+              console.log('Error parsing JSON response: ' + parseError)
+            }
             setlogoAnimation(false);
           }  
       };
