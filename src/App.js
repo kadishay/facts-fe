@@ -35,7 +35,7 @@ function App() {
             try {
               setFact(JSON.parse(this.response));
             } catch (parseError) {
-              console.log('Error parsing JSON response: ' + parseError)
+              console.log('Error parsing JSON response: ' + parseError);
             }
             setlogoAnimation(false);
           }  
@@ -68,7 +68,7 @@ function App() {
                 document.body.appendChild(canvas);
             });
     */
-    html2canvas(document.querySelectorAll(".App")[0]).then(function(canvas) {
+    html2canvas(document.querySelectorAll(".App")[0], { windowWidth: 1600, windowHeight: 900}).then(function(canvas) {
         saveAs(canvas.toDataURL(), 'vereally.png');
     });
   }
@@ -123,7 +123,7 @@ function App() {
         <div className="fact fact-title"> SUMMARY </div>
         <div className="fact"> {fact.sum} </div>
         
-        <div className="icons-container">
+        <div className="icons-container" data-html2canvas-ignore>
           <br />
           <img className="copy-button twitter-button" src={twitterX} onClick={()=>{copyText(true)}}  title="Copy X text to clipboard"/>
           <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} title="Copy all text to clipboard"/>
@@ -132,7 +132,7 @@ function App() {
       </div>
       : ""}
 
-      {fact && fact.sources ? <div className="source-container">
+      {fact && fact.sources ? <div className="source-container" data-html2canvas-ignore>
           <br />
           <div className="fact-sources-title">{fact && fact.sources ? "Sources:" : ""}</div>
           <div className="fact-sources">{fact && fact.sources ? fact.sources.map((source, id)=> <div key={id} className="fact-card">
