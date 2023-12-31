@@ -98,7 +98,7 @@ function App() {
       <div className="input-containter">
         <img className="magnifying-glass" src={magnifingGlass} />
         {theory ? <img className="clean-input" src={deleteIcon} onClick={()=>{setTheory("")}} /> : ""}
-        <input placeholder="Enter your text and let’s check it" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
+        <input placeholder="Enter text to fact check in any language" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
       </div>
       <div className="button" onClick={handle}> Really? </div>
 
