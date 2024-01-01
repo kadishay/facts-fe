@@ -63,11 +63,6 @@ function App() {
   }
 
   function saveImage() {
-    /*
-      html2canvas(document.body).then(function(canvas) {
-                document.body.appendChild(canvas);
-            });
-    */
     html2canvas(document.querySelectorAll(".App")[0], { windowWidth: 1600, windowHeight: 900}).then(function(canvas) {
         saveAs(canvas.toDataURL(), 'vereally.png');
     });
