@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import html2canvas from 'html2canvas';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -20,15 +20,22 @@ const tldrOptions = {
   "other": "other"
 }
 
+let searchMade = false;
+
 function App() {
   const [theory, setTheory] = useState("");
   const [fact, setFact] = useState("");
   const [logoAnimation, setlogoAnimation] = useState(false);
+  const [showSearch, setShowSearch] = useState(true);
   //const [mode, setMode] = useState(true); // true is funny
 
   const onChangeHandler = event => {
     setTheory(event.target.value);
   };
+
+  useEffect(() => {
+    setShowSearch(true);
+  },[theory]);
 
   function handle(e){
     if(!e.key || e.key === "Enter"){
@@ -40,6 +47,7 @@ function App() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             try {
               setFact(JSON.parse(this.response));
+              setShowSearch(false);
             } catch (parseError) {
               console.log('Error parsing JSON response: ' + parseError);
             }
@@ -109,9 +117,9 @@ function App() {
       </div>
       <div className="input-containter">
         <img className="magnifying-glass" src={magnifingGlass} />
-        {false ? <img className="clean-input" src={deleteIcon} onClick={()=>{setTheory("")}} /> : ""}
-        <input placeholder="Enter text to fact check in any language" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
-        <div className="button" onClick={handle}> Really? </div>
+        {theory ? <img className="clean-input" src={deleteIcon} onClick={()=>{setTheory("")}} /> : ""}
+        <input placeholder="Enter text to fact check in any language" className={'theory' + (showSearch ? '' :' padding-fix')} onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
+        <div className={'button' + (showSearch ? '' :' hide-search')} onClick={handle}> Really? </div>
       </div>
 
       {/* 
@@ -128,7 +136,7 @@ function App() {
       {fact ?  
       <div className="fact-container">
         <div className={'fact fact-tldr ' + (tldr===tldrOptions.true ? 'tldr-true' : (tldr===tldrOptions.false ? 'tldr-false' : ''))}> 
-          {(fact.tldr ? fact.tldr.trim() : "")} 
+          {(fact.tldr ? fact.tldr.trim().replace(/\.$/, "") : "")} 
         </div>
         <br />
         <div className="fact fact-title"> X </div>

@@ -76,20 +76,28 @@ h3 {
 }
 
 .input-containter {
-    width: 50%;
-    margin: 0 25%;
+    width: 40%;
+    margin: 0px 30%;
     position: relative;
 }
 
 .input-containter input {
   border-radius: 50px;
-  padding: 0 50px;
+  padding: 0 110px 0 50px;
   font-size: 16px;
   height: 42px;
   width: 100%;
   box-sizing: border-box;
   font-family: 'MONTSERRAT';
   border: 0;
+  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.input-containter input.padding-fix {
+  padding-right: 50px;
 }
 
 .input-containter .magnifying-glass{
@@ -100,7 +108,7 @@ h3 {
   margin-top: 12px;
 }
 
-/*
+
 .input-containter .clean-input {
   height: 18px;
   position: absolute;
@@ -110,7 +118,7 @@ h3 {
   cursor: pointer;
   padding: 10px;
 }
-*/
+
 
 .button {
   position: absolute;
@@ -127,7 +135,11 @@ h3 {
   display: inline-block;
   right: 5px;
   top: 4px;
+  z-index: 10;
+  user-select: none;
 }
+
+.hide-search {display: none;}
 
 .fact-container {
   min-height: 100px;
