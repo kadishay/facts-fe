@@ -127,7 +127,7 @@ function App() {
       
       {fact ?  
       <div className="fact-container">
-        <div className={'fact fact-tldr ' + (tldr===tldrOptions.true ? 'tldr-true' : (tldr===tldrOptions.false ? 'tldr-flase' : ''))}> 
+        <div className={'fact fact-tldr ' + (tldr===tldrOptions.true ? 'tldr-true' : (tldr===tldrOptions.false ? 'tldr-false' : ''))}> 
           {(fact.tldr ? fact.tldr.trim() : "")} 
         </div>
         <br />
