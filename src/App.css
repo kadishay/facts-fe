@@ -20,14 +20,14 @@ body {
    font-family: 'Montserrat';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1E1E1E;
+  background-color: #000;
   overflow-x: hidden;
 }
 
 .App {
   /*padding-top: 10px;
   padding-right: 35px;*/
-  background-color: #1E1E1E;
+  background-color: #000;
 }
 
 .header-container {
@@ -35,28 +35,28 @@ body {
 }
 
 .logo {
-  box-sizing: border-box;
-  width: 35px;
-  aspect-ratio: 1;
-  border: 0px solid #1E1E1E;
-  background: radial-gradient(farthest-side,#fff 85%,#0000) top, 
-              radial-gradient(farthest-side,#fff 85%,#0000) top, 
-              radial-gradient(farthest-side,#fff 85%,#0000) left, 
-              radial-gradient(farthest-side,#fff 85%,#0000) right, 
-              radial-gradient(farthest-side,#fff 85%,#0000) bottom;
-  background-size: 13px 13px;
-  background-repeat: no-repeat;
   display: inline-block;
+  box-sizing: border-box;
+  width: 70px;
+  aspect-ratio: 1;
+  border: 13px solid #000;
+  background: radial-gradient(farthest-side,#fff 85%,#0000) top, radial-gradient(farthest-side,#fff 85%,#0000) top, radial-gradient(farthest-side,#fff 85%,#0000) left, radial-gradient(farthest-side,#fff 85%,#0000) right, radial-gradient(farthest-side,#fff 85%,#0000) bottom, #000;
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  filter: blur(4px) contrast(10);
+  top: 18px;
+  position: relative;
+  z-index: 0;
 }
 .logo.logo-animation {
   animation: logo 2s infinite;
 }
 @keyframes logo {
-  0%   {background-position:top,top,left,right,bottom; filter: opacity(1);}
-  25%  {background-position:right,top,left,right,bottom; filter: brightness(0) saturate(100%) invert(99%) sepia(3%) saturate(7386%) hue-rotate(333deg) brightness(116%) contrast(92%);}
-  50%  {background-position:bottom,top,left,right,bottom; filter: opacity(1);}
-  75%  {background-position:left,top,left,right,bottom; filter: brightness(0) saturate(100%) invert(99%) sepia(3%) saturate(7386%) hue-rotate(333deg) brightness(116%) contrast(92%);}
-  100% {background-position:top,top,left,right,bottom; filter: opacity(1);}
+  0%   {background-position:top,top,left,right,bottom;}
+  25%  {background-position:right,top,left,right,bottom;}
+  50%  {background-position:bottom,top,left,right,bottom;}
+  75%  {background-position:left,top,left,right,bottom;}
+  100% {background-position:top,top,left,right,bottom;}
 }
 
 h1 {
@@ -64,7 +64,15 @@ h1 {
   font-size: 3em;
   color: #eee;
   display: inline-block;
-  padding-left: 10px;
+  margin-bottom: 3px;
+  z-index: 1;
+  position: relative;
+}
+
+h3 {
+  color: #8D8D8D;
+  font-weight: 400;
+  margin: 3px 0 30px 0;
 }
 
 .input-containter {
@@ -81,6 +89,7 @@ h1 {
   width: 100%;
   box-sizing: border-box;
   font-family: 'MONTSERRAT';
+  border: 0;
 }
 
 .input-containter .magnifying-glass{
@@ -91,6 +100,7 @@ h1 {
   margin-top: 12px;
 }
 
+/*
 .input-containter .clean-input {
   height: 18px;
   position: absolute;
@@ -100,22 +110,23 @@ h1 {
   cursor: pointer;
   padding: 10px;
 }
+*/
 
 .button {
   position: absolute;
-  left: calc(50% - 60px);
-  width: 120px;
-  height: 40px;
-  border: 2px solid #6b6b6b;
-  border-radius: 25px;
+  width: 95px;
+  height: 34px;
+  border-radius: 50px;
   vertical-align: middle;
-  line-height: 40px;
+  line-height: 32px;
   font-size: 20px;
   cursor: pointer;
-  color: #272325;
+  color: white;
   text-align: center;
-  margin-top: 20px;
-  background-color: white;
+  background-color: #00A3FF;
+  display: inline-block;
+  right: 5px;
+  top: 4px;
 }
 
 .fact-container {
@@ -133,6 +144,24 @@ h1 {
   color: black;
   display: inline-block;
   margin-bottom: 30px;
+  border-radius: 5px;
+  font-weight: 600;
+  min-width: 110px;
+  text-align: center;
+}
+
+.fact-tldr.tldr-true {
+  color: white;
+  background-color: #47B24C;
+}
+
+.tldr-true:after, .tldr-false:after {
+  content:'!';
+}
+
+.fact-tldr.tldr-false {
+  color: white;
+  background-color: #FF3939;
 }
 
 .fact-title {

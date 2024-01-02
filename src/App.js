@@ -14,6 +14,12 @@ import screenshot from './screenshot.svg';
 import magnifingGlass from './magnifying-glass.png';
 import deleteIcon from './delete.png';
 
+const tldrOptions = {
+  "true": "true",
+  "false": "false",
+  "other": "other"
+}
+
 function App() {
   const [theory, setTheory] = useState("");
   const [fact, setFact] = useState("");
@@ -84,18 +90,29 @@ function App() {
     }
   }
 
+  let tldr = tldrOptions.other;
+  if (fact && fact.tldr) {  
+    if (fact.tldr.trim().toLowerCase().indexOf("true") === 0) {
+      tldr = tldrOptions.true;
+    } else if (fact.tldr.trim().toLowerCase().indexOf("false") === 0) {
+      tldr = tldrOptions.false;
+    }
+  }
+  
+
   return (
     <div className="App">
       <div className="header-container">
         <div className={logoAnimation ? "logo logo-animation" : "logo"} />
         <h1 className="title">VEREALLY</h1>
+        <h3 className="sub-title"> Ask whenever you're in doubt </h3>
       </div>
       <div className="input-containter">
         <img className="magnifying-glass" src={magnifingGlass} />
-        {theory ? <img className="clean-input" src={deleteIcon} onClick={()=>{setTheory("")}} /> : ""}
+        {false ? <img className="clean-input" src={deleteIcon} onClick={()=>{setTheory("")}} /> : ""}
         <input placeholder="Enter text to fact check in any language" className="theory" onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
+        <div className="button" onClick={handle}> Really? </div>
       </div>
-      <div className="button" onClick={handle}> Really? </div>
 
       {/* 
         <div className="responseStyle"> 
@@ -110,7 +127,9 @@ function App() {
       
       {fact ?  
       <div className="fact-container">
-        <div className="fact fact-tldr"> TLDR - {fact.tldr? fact.tldr.trim() : ""} </div>
+        <div className={'fact fact-tldr ' + (tldr===tldrOptions.true ? 'tldr-true' : (tldr===tldrOptions.false ? 'tldr-flase' : ''))}> 
+          {(fact.tldr ? fact.tldr.trim() : "")} 
+        </div>
         <br />
         <div className="fact fact-title"> X </div>
         <div className="fact"> {fact.x} </div>
