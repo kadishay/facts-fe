@@ -38,6 +38,9 @@ function App() {
   },[theory]);
 
   function handle(e){
+    if (theory.trim()=="") {
+      return;
+    }
     if(!e.key || e.key === "Enter"){
       setFact("");
       e.preventDefault(); // Ensure it is only this code that runs
