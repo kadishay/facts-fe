@@ -141,6 +141,8 @@ h3 {
 
 .hide-search {display: none;}
 
+.button.disable-search {background-color: lightblue !important;}
+
 .fact-container {
   min-height: 100px;
   padding: 85px 25% 40px 26%;

@@ -20,13 +20,12 @@ const tldrOptions = {
   "other": "other"
 }
 
-let searchMade = false;
-
 function App() {
   const [theory, setTheory] = useState("");
   const [fact, setFact] = useState("");
   const [logoAnimation, setlogoAnimation] = useState(false);
   const [showSearch, setShowSearch] = useState(true);
+  const [disableSearch, setDisableSearch] = useState(false);
   //const [mode, setMode] = useState(true); // true is funny
 
   const onChangeHandler = event => {
@@ -41,8 +40,13 @@ function App() {
     if (theory.trim()=="") {
       return;
     }
+    if (disableSearch) {
+      return;
+    }
+
     if(!e.key || e.key === "Enter"){
       setFact("");
+      setDisableSearch(true);
       e.preventDefault(); // Ensure it is only this code that runs
       var xhr = new XMLHttpRequest();
       setlogoAnimation(true);
@@ -50,6 +54,7 @@ function App() {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             try {
               setFact(JSON.parse(this.response));
+              setDisableSearch(false);
               setShowSearch(false);
             } catch (parseError) {
               console.log('Error parsing JSON response: ' + parseError);
@@ -103,9 +108,10 @@ function App() {
 
   let tldr = tldrOptions.other;
   if (fact && fact.tldr) {  
-    if (fact.tldr.trim().toLowerCase().indexOf("true") === 0) {
+    let tldrText = fact.tldr.trim().toLowerCase();
+    if (tldrText.indexOf("true") === 0) {
       tldr = tldrOptions.true;
-    } else if (fact.tldr.trim().toLowerCase().indexOf("false") === 0) {
+    } else if (tldrText.indexOf("false") === 0) {
       tldr = tldrOptions.false;
     }
   }
@@ -122,7 +128,7 @@ function App() {
         <img className="magnifying-glass" src={magnifingGlass} />
         {theory ? <img className="clean-input" src={deleteIcon} onClick={()=>{setTheory("")}} /> : ""}
         <input placeholder="Enter text to fact check in any language" className={'theory' + (showSearch ? '' :' padding-fix')} onChange={onChangeHandler} onKeyPress={handle} value={theory}></input>
-        <div className={'button' + (showSearch ? '' :' hide-search')} onClick={handle}> Really? </div>
+        <div className={'button' + (showSearch ? '' :' hide-search') + (disableSearch? ' disable-search' : '')} onClick={handle}> Really? </div>
       </div>
 
       {/* 
