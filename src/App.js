@@ -53,7 +53,13 @@ function App() {
       xhr.onreadystatechange = function () {
           if (xhr.readyState === XMLHttpRequest.DONE) {
             try {
-              setFact(JSON.parse(this.response));
+              if (xhr.status === 500) {
+                setFact({
+                  tldr: "Try again later..."
+                });
+              } else {
+                setFact(JSON.parse(this.response));
+              }
               setDisableSearch(false);
               setShowSearch(false);
             } catch (parseError) {
