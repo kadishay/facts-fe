@@ -55,7 +55,7 @@ function App() {
             try {
               if (xhr.status === 500) {
                 setFact({
-                  tldr: "Try again later..."
+                  error: "Try again later..."
                 });
               } else {
                 setFact(JSON.parse(this.response));
@@ -148,25 +148,31 @@ function App() {
         }
       */}
       
-      {fact ?  
-      <div className="fact-container">
-        <div className={'fact fact-tldr ' + (tldr===tldrOptions.true ? 'tldr-true' : (tldr===tldrOptions.false ? 'tldr-false' : ''))}> 
-          {(fact.tldr ? fact.tldr.trim().replace(/\.$/, "") : "")} 
+      {fact && fact.error ?  
+        <div className="fact-container">
+          <div className="fact fact-title"> {fact.error} </div>
         </div>
-        <br />
-        <div className="fact fact-title"> X </div>
-        <div className="fact"> {fact.x} </div>
-        <br />
-        <div className="fact fact-title"> SUMMARY </div>
-        <div className="fact"> {fact.sum} </div>
-        
-        <div className="icons-container" data-html2canvas-ignore>
+      : ""}
+
+      {fact && !fact.error ?  
+        <div className="fact-container">
+          <div className={'fact fact-tldr ' + (tldr===tldrOptions.true ? 'tldr-true' : (tldr===tldrOptions.false ? 'tldr-false' : ''))}> 
+            {(fact.tldr ? fact.tldr.trim().replace(/\.$/, "") : "")} 
+          </div>
           <br />
-          <img className="copy-button twitter-button" src={twitterX} onClick={()=>{copyText(true)}}  title="Copy X text to clipboard"/>
-          <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} title="Copy all text to clipboard"/>
-          <img className="copy-button screen-shoot-button" src={screenshot} onClick={()=>{saveImage()}}   title="Save image"/>
+          <div className="fact fact-title"> X </div>
+          <div className="fact"> {fact.x} </div>
+          <br />
+          <div className="fact fact-title"> SUMMARY </div>
+          <div className="fact"> {fact.sum} </div>
+          
+          <div className="icons-container" data-html2canvas-ignore>
+            <br />
+            <img className="copy-button twitter-button" src={twitterX} onClick={()=>{copyText(true)}}  title="Copy X text to clipboard"/>
+            <img className="copy-button" src={copyClip} onClick={()=>{copyText(false)}} title="Copy all text to clipboard"/>
+            <img className="copy-button screen-shoot-button" src={screenshot} onClick={()=>{saveImage()}}   title="Save image"/>
+          </div>
         </div>
-      </div>
       : ""}
 
       {fact && fact.sources ? <div className="source-container" data-html2canvas-ignore>
